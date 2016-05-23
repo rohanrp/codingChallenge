@@ -1,0 +1,15 @@
+target
+*~
+.idea
+.settings
+.metadata
+.classpath
+.project
+.checkstyle
+Thumbs.db
+MANIFEST.MF
+*.log
+*.iml
+*_Ignore.java
+*.ignore
+*.factorypath
