@@ -2,7 +2,7 @@ package com.papercut.rules;
 
 import com.papercut.model.PrintJob;
 
-public abstract class BasePrintRule {
+public abstract class BasePriceRule {
 	
 	protected PrintJob printJob;
     
@@ -10,11 +10,11 @@ public abstract class BasePrintRule {
     
     public abstract void thenSetJobPricing() throws Exception;
     
-    public BasePrintRule() {
+    public BasePriceRule() {
 		super();
 	}
     
-	public BasePrintRule(PrintJob printJob) {
+	public BasePriceRule(PrintJob printJob) {
 		super();
 		this.printJob = printJob;
 	}
@@ -27,7 +27,7 @@ public abstract class BasePrintRule {
 		this.printJob = printJob;
 	}
 
-	public BasePrintRule getInstance() {
+	public BasePriceRule getInstance() {
 		return this;
 	}
 

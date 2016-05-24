@@ -13,7 +13,7 @@ public class PrintJob {
 	
 	private PaperSide side;
 	
-	private PrintPricing printPricing;
+	private PrintJobPricing printJobPricing;
 	
 	public PrintJob() {
 		super();
@@ -51,13 +51,13 @@ public class PrintJob {
 		this.identifier = identifier;
 	}
 	
-	public PrintJob(int identifier, int totalOverallPages, int totalColourPages, PaperSize size, PaperSide side, PrintPricing printPricing) {
+	public PrintJob(int identifier, int totalOverallPages, int totalColourPages, PaperSize size, PaperSide side, PrintJobPricing printPricing) {
 		super();
 		this.totalOverallPages = totalOverallPages;
 		this.totalColourPages = totalColourPages;
 		this.size = size;
 		this.side = side;
-		this.printPricing = printPricing;
+		this.printJobPricing = printPricing;
 		this.identifier = identifier;
 	}
 
@@ -101,12 +101,12 @@ public class PrintJob {
 		this.side = side;
 	}
 
-	public PrintPricing getPrintPricing() {
-		return printPricing;
+	public PrintJobPricing getPrintJobPricing() {
+		return printJobPricing;
 	}
 
-	public void setPrintPricing(PrintPricing printPricing) {
-		this.printPricing = printPricing;
+	public void setPrintJobPricing(PrintJobPricing printPricing) {
+		this.printJobPricing = printPricing;
 	}
 
 }

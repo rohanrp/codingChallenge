@@ -15,6 +15,8 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.papercut.TestApplicationConfig;
+import com.papercut.exception.InvalidPrintJobException;
+import com.papercut.exception.PricingNotDefinedException;
 import com.papercut.model.Money;
 import com.papercut.model.PaperSide;
 import com.papercut.model.PrintJob;
@@ -40,11 +42,34 @@ public class PricingRulesEngineTest {
     	 pricingRulesEngine.executeRules(printJob);
     	 
     	 Money totalPayablePrice = priceExecutor.getTotalPrice(printJob);
-    	 assertTrue("Cost should be at least more than $0.00)", totalPayablePrice.getAmount().compareTo(BigDecimal.ZERO)>0);
+    	 assertTrue("Cost should be at least more than $0.00)", totalPayablePrice.getAmount().compareTo(BigDecimal.ZERO) > 0);
     	 
     	 logger.info("Single print job price: " + totalPayablePrice.toString());
     }
     
+    
+    @Test(expected=InvalidPrintJobException.class)
+    public void executeSinglePrintJob_willTestFailureWhenColourPagesMoreThanOverallPages() throws Exception {
+    	 
+    	 PrintJob printJob = new PrintJob(11,5555,PaperSide.SINGLE);
+    
+    	 pricingRulesEngine.executeRules(printJob);
+    	 
+    	 priceExecutor.getTotalPrice(printJob);
+
+    }
+    
+    
+    @Test(expected=PricingNotDefinedException.class)
+    public void executeSinglePrintJob_willTestFailureForWhenPricingNotFound() throws Exception {
+    	 
+    	 PrintJob printJob = new PrintJob();
+    
+    	 pricingRulesEngine.executeRules(printJob);
+    	 
+    	 priceExecutor.getTotalPrice(printJob);
+
+    }
     
     @Test
     public void executeMultiplePrintJobs_willTestSuccess() throws Exception {
@@ -58,10 +83,25 @@ public class PricingRulesEngineTest {
     	    
     	 Money totalPayablePrice = priceExecutor.getTotalPrice(printJobs);
     	 
-    	 assertTrue("Cost of all print jobs should be at least more than $0.00)", totalPayablePrice.getAmount().compareTo(BigDecimal.ZERO)>0);
+    	 assertTrue("Cost of all print jobs should be at least more than $0.00)", totalPayablePrice.getAmount().compareTo(BigDecimal.ZERO) > 0);
     	 
     	 
     	 logger.info("Multiple print job price: " + totalPayablePrice.toString());
+    }
+    
+    @Test(expected=PricingNotDefinedException.class)
+    public void executeMultiplePrintJobs_willTestFailureForSingleBadJob() throws Exception {
+    	 
+    	 List<PrintJob> printJobs = Arrays.asList(
+    			 new PrintJob(1,11,5,PaperSide.SINGLE),
+    			 // no pricing to be found for below job
+    			 new PrintJob(),
+    			 new PrintJob(3,13,5,PaperSide.DOUBLE));
+    
+    	 pricingRulesEngine.executeRules(printJobs);
+    	    
+    	 priceExecutor.getTotalPrice(printJobs);
+    	 
     }
 
 }

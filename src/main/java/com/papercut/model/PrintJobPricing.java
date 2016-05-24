@@ -2,17 +2,17 @@ package com.papercut.model;
 
 import java.math.BigDecimal;
 
-public class PrintPricing {
+public class PrintJobPricing {
 	
 	Money basePricePerPage = Money.dollars(new BigDecimal("0.0"));
 	Money colourPremiumPerPage = Money.dollars(new BigDecimal("0.0"));
 	
 	
-	public PrintPricing() {
+	public PrintJobPricing() {
 		super();
 	}
 	
-	public PrintPricing(Money basePricePerPage, Money colourPremiumPerPage) {
+	public PrintJobPricing(Money basePricePerPage, Money colourPremiumPerPage) {
 		super();
 		this.basePricePerPage = basePricePerPage;
 		this.colourPremiumPerPage = colourPremiumPerPage;

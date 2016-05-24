@@ -10,7 +10,7 @@ import com.papercut.exception.InvalidPrintJobException;
 import com.papercut.exception.PricingNotDefinedException;
 import com.papercut.model.Money;
 import com.papercut.model.PrintJob;
-import com.papercut.model.PrintPricing;
+import com.papercut.model.PrintJobPricing;
 import com.papercut.service.PrintJobCostCalculatorV1;
 
 @Service
@@ -21,7 +21,7 @@ public class PrintJobCostCalculatorV1Impl implements PrintJobCostCalculatorV1 {
 	public Supplier<Money> calculateTotalPriceOfJob(PrintJob printJob) throws Exception {
 		// Total Price = (Total Overall Pages * Base Price per page) + (Total Colour Pages * Colour Premium per page)
 		
-		PrintPricing printPricing = printJob.getPrintPricing();
+		PrintJobPricing printPricing = printJob.getPrintJobPricing();
 		
 		if (printPricing == null || printPricing.getBasePricePerPage() == null || printPricing.getColourPremiumPerPage() == null) {
 			throw new PricingNotDefinedException("No pricing structure defined for print job: " + printJob.getIdentifier());

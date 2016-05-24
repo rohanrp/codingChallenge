@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
 
 import com.papercut.PrintJobConsoleRunner;
 import com.papercut.model.PrintJob;
-import com.papercut.rules.DoubleSidedA4;
-import com.papercut.rules.SingleSidedA4;
+import com.papercut.rules.DoubleSidedA4PriceRule;
+import com.papercut.rules.SingleSidedA4PriceRule;
 import com.papercut.service.PricingRulesEngine;
 
 @Service
@@ -28,10 +28,10 @@ public class PricingRulesEngineV1Impl implements PricingRulesEngine {
 	private static final Logger logger = LoggerFactory.getLogger(PrintJobConsoleRunner.class);
 	
 	@Autowired
-	private SingleSidedA4 singleSidedA4;
+	private SingleSidedA4PriceRule singleSidedA4;
 	
 	@Autowired
-	private DoubleSidedA4 doubleSidedA4;
+	private DoubleSidedA4PriceRule doubleSidedA4;
 	
 	private PricingRulesEngineV1Impl() {
 	}

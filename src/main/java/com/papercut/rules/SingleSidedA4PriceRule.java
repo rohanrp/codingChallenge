@@ -11,22 +11,22 @@ import com.papercut.model.Money;
 import com.papercut.model.PaperSide;
 import com.papercut.model.PaperSize;
 import com.papercut.model.PrintJob;
-import com.papercut.model.PrintPricing;
+import com.papercut.model.PrintJobPricing;
 
 @Rule
 @Component
-public class SingleSidedA4 extends BasePrintRule {
+public class SingleSidedA4PriceRule extends BasePriceRule {
 	
 	final static Money BASE_PRICE_PER_PAGE = Money.dollars(new BigDecimal("0.15"));
 	final static Money COLOUR_PREMIUM_PRICE_PER_PAGE = Money.dollars(new BigDecimal("0.10"));
 	final static PaperSize PAPER_SIZE = PaperSize.A4;
 	final static PaperSide PAPER_SIDE = PaperSide.SINGLE;
 	
-	public SingleSidedA4() {
+	public SingleSidedA4PriceRule() {
 		super();	
 	}
 	
-	public SingleSidedA4(PrintJob printJob) {
+	public SingleSidedA4PriceRule(PrintJob printJob) {
 		super(printJob);	
 	}
 
@@ -38,11 +38,11 @@ public class SingleSidedA4 extends BasePrintRule {
 	@Action(order = 1)
 	public void thenSetJobPricing() throws Exception {
 		
-		PrintPricing printPricing = new PrintPricing();
+		PrintJobPricing printPricing = new PrintJobPricing();
 		printPricing.setBasePricePerPage(BASE_PRICE_PER_PAGE);
 		printPricing.setColourPremiumPerPage(COLOUR_PREMIUM_PRICE_PER_PAGE);
 
-		this.printJob.setPrintPricing(printPricing);
+		this.printJob.setPrintJobPricing(printPricing);
 	}
 
 
