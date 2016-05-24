@@ -2,14 +2,23 @@ package com.papercut.model;
 
 public class PrintJob {
 	
+	private int identifier;
+	
 	private int totalOverallPages;
 	
 	private int totalColourPages;
 	
+	// default size
 	private PaperSize size = PaperSize.A4;
 	
 	private PaperSide side;
-
+	
+	private PrintPricing printPricing;
+	
+	public PrintJob() {
+		super();
+	}
+	
 	public PrintJob(int totalOverallPages, int totalColourPages, PaperSide side) {
 		super();
 		this.totalOverallPages = totalOverallPages;
@@ -23,6 +32,41 @@ public class PrintJob {
 		this.totalColourPages = totalColourPages;
 		this.size = size;
 		this.side = side;
+	}
+	
+	public PrintJob(int identifier, int totalOverallPages, int totalColourPages, PaperSide side) {
+		super();
+		this.totalOverallPages = totalOverallPages;
+		this.totalColourPages = totalColourPages;
+		this.side = side;
+		this.identifier = identifier;
+	}
+	
+	public PrintJob(int identifier, int totalOverallPages, int totalColourPages, PaperSize size, PaperSide side) {
+		super();
+		this.totalOverallPages = totalOverallPages;
+		this.totalColourPages = totalColourPages;
+		this.size = size;
+		this.side = side;
+		this.identifier = identifier;
+	}
+	
+	public PrintJob(int identifier, int totalOverallPages, int totalColourPages, PaperSize size, PaperSide side, PrintPricing printPricing) {
+		super();
+		this.totalOverallPages = totalOverallPages;
+		this.totalColourPages = totalColourPages;
+		this.size = size;
+		this.side = side;
+		this.printPricing = printPricing;
+		this.identifier = identifier;
+	}
+
+	public int getIdentifier() {
+		return identifier;
+	}
+
+	public void setIdentifier(int identifier) {
+		this.identifier = identifier;
 	}
 
 	public int getTotalOverallPages() {
@@ -56,5 +100,13 @@ public class PrintJob {
 	public void setSide(PaperSide side) {
 		this.side = side;
 	}
-	
+
+	public PrintPricing getPrintPricing() {
+		return printPricing;
+	}
+
+	public void setPrintPricing(PrintPricing printPricing) {
+		this.printPricing = printPricing;
+	}
+
 }

@@ -5,36 +5,44 @@ import java.math.BigDecimal;
 import org.easyrules.annotation.Action;
 import org.easyrules.annotation.Condition;
 import org.easyrules.annotation.Rule;
+import org.springframework.stereotype.Component;
 
 import com.papercut.model.Money;
 import com.papercut.model.PaperSide;
 import com.papercut.model.PaperSize;
 import com.papercut.model.PrintJob;
+import com.papercut.model.PrintPricing;
 
 @Rule
+@Component
 public class DoubleSidedA4 extends BasePrintRule {
 	
-	final static Money basePricePerPage = Money.dollars(new BigDecimal("0.10"));
-	final static Money colourPremiumPerPage = Money.dollars(new BigDecimal("0.10"));
+	final static Money BASE_PRICE_PER_PAGE = Money.dollars(new BigDecimal("0.10"));
+	final static Money COLOUR_PREMIUM_PRICE_PER_PAGE = Money.dollars(new BigDecimal("0.10"));
+	final static PaperSize PAPER_SIZE = PaperSize.A4;
+	final static PaperSide PAPER_SIDE = PaperSide.DOUBLE;
+	
+	public DoubleSidedA4() {
+		super();	
+	}
 	
 	public DoubleSidedA4(PrintJob printJob) {
-		super(printJob, basePricePerPage, colourPremiumPerPage);	
+		super(printJob);	
 	}
 
 	@Condition
     public boolean whenTypeOfPrintJobIs() {
-        return this.printJob.getSize() == PaperSize.A4 && this.printJob.getSide() == PaperSide.SINGLE;
+		return this.printJob.getSize() == PAPER_SIZE && this.printJob.getSide() == PAPER_SIDE;
     }
 
 	@Action(order = 1)
-	public Money calculateTotalPriceOfJob() throws Exception {
-		// Total Price = (#Total Pages * Base Price pp) + (#Colour Pages * Colour Premium pp)
-		Money totalPrice = Money.dollars(
-				(this.getBasePricePerPage().getAmount().multiply(new BigDecimal(this.printJob.getTotalOverallPages())))
-						.add(this.getColourPremiumPerPage().getAmount()
-								.multiply(new BigDecimal(this.getPrintJob().getTotalColourPages()))));
-
-		return totalPrice;
+	public void thenSetJobPricing() throws Exception {
+		
+		PrintPricing printPricing = new PrintPricing();
+		printPricing.setBasePricePerPage(BASE_PRICE_PER_PAGE);
+		printPricing.setColourPremiumPerPage(COLOUR_PREMIUM_PRICE_PER_PAGE);
+		
+		this.printJob.setPrintPricing(printPricing);
 	}
 
 
