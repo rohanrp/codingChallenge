@@ -39,10 +39,10 @@ public class PrintJobConsoleRunner implements CommandLineRunner {
 	@Override
 	public void run(String... arg0) throws Exception {
 		
-        
+        //read a list of print jobs from a csv file
 		List<PrintJob> printJobs = fileReader.readCSVFile("printjobs.csv");
 
-        //register the pricing rules
+        //send the print job list to a rules engine to determine pricing of each job
         rulesEngine.executeRules(printJobs);
         
         // print results
@@ -55,7 +55,7 @@ public class PrintJobConsoleRunner implements CommandLineRunner {
         logger.info("Breakdown of costs by job+++++++++++++++++++++++++++++++++++++++++++++++++");
         
         for (PrintJob printJob : printJobs) {
-        	logger.info("+++ " + priceExecutor.getTotalPrice(printJob).toString());
+        	logger.info("+++" + printJob.toString() + ": " + priceExecutor.getTotalPrice(printJob).toString());
         }
         
         

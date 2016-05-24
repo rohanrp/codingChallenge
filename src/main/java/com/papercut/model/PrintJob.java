@@ -116,5 +116,21 @@ public class PrintJob {
 	public void setPrintJobPricing(PrintJobPricing printPricing) {
 		this.printJobPricing = printPricing;
 	}
-
+	
+	@Override
+    public String toString() {
+        return "PrintJob {" +
+                "Id='" + identifier + "', " +
+				 "Total Pages='" + totalOverallPages + "', " +
+				 "Total Colour Pages='" + totalColourPages + "', " +
+				 "Paper Size='" + size + "', " +
+				  "Paper siding='" + side + "'" +
+                '}';
+    }
+	
+	@Override
+    public int hashCode() {
+        return (int) (identifier ^ (identifier >>> 32));
+    }
+	
 }
