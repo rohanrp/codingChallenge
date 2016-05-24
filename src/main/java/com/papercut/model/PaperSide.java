@@ -1,5 +1,13 @@
 package com.papercut.model;
 
+/**
+* Whether a paper is printed on both sides or not
+*
+* @author  Rohan Pereira
+* @version 1.0
+* @since   2016-05-24
+*/
+
 public enum PaperSide {
 	SINGLE(false),
 	DOUBLE(true);

@@ -1,5 +1,11 @@
 package com.papercut.rules;
-
+/**
+* A pricing rule to be applied when the paper matches the below condition
+*
+* @author  Rohan Pereira
+* @version 1.0
+* @since   2016-05-24
+*/
 import java.math.BigDecimal;
 
 import org.easyrules.annotation.Action;

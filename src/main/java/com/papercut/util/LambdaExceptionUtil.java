@@ -1,5 +1,15 @@
 package com.papercut.util;
-
+/**
+* A workaround hack to allow a lambda to throw a checked exception without the compiler complaining
+* about the need for a try catch within the lambda
+* 
+* Taken from here:
+* http://stackoverflow.com/questions/27644361/how-can-i-throw-checked-exceptions-from-inside-java-8-streams/30974991#30974991
+* 
+* @author  Rohan Pereira
+* @version 1.0
+* @since   2016-05-24
+*/
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -64,7 +74,7 @@ public static <T, E extends Exception> Supplier<T> rethrowSupplier(Supplier_With
     }
 
 /** uncheck(() -> Class.forName("xxx")); */
-public static void uncheck(Runnable_WithExceptions t)
+public static void uncheck(@SuppressWarnings("rawtypes") Runnable_WithExceptions t)
     {
     try { t.run(); }
     catch (Exception exception) { throwAsUnchecked(exception); }

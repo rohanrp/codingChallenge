@@ -1,5 +1,13 @@
 package com.papercut.model;
 
+/**
+* The pricing metadata that will be used by pricing algorithms for a print job
+*
+* @author  Rohan Pereira
+* @version 1.0
+* @since   2016-05-24
+*/
+
 import java.math.BigDecimal;
 
 public class PrintJobPricing {

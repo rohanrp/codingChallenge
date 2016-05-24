@@ -1,5 +1,12 @@
 package com.papercut.service.impl;
-
+/**
+* PriceExecutable provides a medium that defines the type of pricing calculator
+* to be applied to print job(s)
+*
+* @author  Rohan Pereira
+* @version 1.0
+* @since   2016-05-24
+*/
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -27,6 +34,10 @@ public class PriceExecutableImpl implements PriceExecutable {
 	}
 
 
+	/**
+	 * Aggregating the sum of each print job to an overall amount
+	 * Get a list of print jobs -> map each to their individual sum -> reduce each to a single final value
+	 */
 	@Override
 	public Money getTotalPrice(List<PrintJob> printJobs) throws Exception {
 		

@@ -1,5 +1,13 @@
 package com.papercut.model;
 
+/**
+* The smallest unit of product that must be priced against to a customer
+*
+* @author  Rohan Pereira
+* @version 1.0
+* @since   2016-05-24
+*/
+
 public class PrintJob {
 	
 	private int identifier;

@@ -1,5 +1,12 @@
 package com.papercut.rules;
 
+/**
+* A base class that sets the standard for the when-then pricing rules model through an abstract interface.
+*
+* @author  Rohan Pereira
+* @version 1.0
+* @since   2016-05-24
+*/
 import com.papercut.model.PrintJob;
 
 public abstract class BasePriceRule {

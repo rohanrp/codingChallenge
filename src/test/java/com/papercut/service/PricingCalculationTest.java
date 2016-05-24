@@ -1,5 +1,11 @@
 package com.papercut.service;
-
+/**
+* Tests the pricing algorithm to ensure it is mathematically sound
+*
+* @author  Rohan Pereira
+* @version 1.0
+* @since   2016-05-24
+*/
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
@@ -31,7 +37,7 @@ public class PricingCalculationTest {
 	
 	
     @Test
-    public void calculateTotalPriceOfSingleJob_willTestSuccess() throws Exception {
+    public void calculateTotalPriceOfSingleJob_willTestSuccessBasePriceOnly() throws Exception {
     	 
     	// set custom pricing
     	PrintJobPricing printPricing = new PrintJobPricing();
@@ -48,6 +54,23 @@ public class PricingCalculationTest {
     	 
     }
     
+    @Test
+    public void calculateTotalPriceOfSingleJob_willTestSuccessColourPremiumOnly() throws Exception {
+    	 
+    	// set custom pricing
+    	PrintJobPricing printPricing = new PrintJobPricing();
+		printPricing.setBasePricePerPage(Money.dollars(new BigDecimal("0.00")));
+		printPricing.setColourPremiumPerPage(Money.dollars(new BigDecimal("0.10")));
+		
+    	// set print job with custom pricing
+		PrintJob printJob = new PrintJob(10,10,PaperSide.SINGLE);
+		printJob.setPrintJobPricing(printPricing);
+		
+		BigDecimal price  = calculator.calculateTotalPriceOfJob(printJob).get().getAmount();
+		
+    	assertTrue("10 pages times 10 cents of colour premium pricing should be $1.00", price.equals(new BigDecimal("1.00")));
+    	 
+    }
     
     @Test
     public void calculateTotalPriceOfMultipleJob_willTestSuccess() throws Exception {

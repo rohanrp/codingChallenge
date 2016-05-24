@@ -1,5 +1,11 @@
 package com.papercut.service;
-
+/**
+* Tests the rules engine to ensure that a price rule is found
+*
+* @author  Rohan Pereira
+* @version 1.0
+* @since   2016-05-24
+*/
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;

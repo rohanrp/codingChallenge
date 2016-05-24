@@ -1,13 +1,17 @@
 package com.papercut.service.impl;
-
+/**
+* A class to help read a file into a list of print job objects
+* It is extendible to different file formats
+*
+* @author  Rohan Pereira
+* @version 1.0
+* @since   2016-05-24
+*/
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.file.NoSuchFileException;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -19,14 +23,12 @@ import com.papercut.model.PaperSide;
 import com.papercut.model.PrintJob;
 import com.papercut.service.CSVPrintJobReadeable;
 
-/**
- * @author Rohan Pereira
- * 
- */
  
 @Service
 public class RawDataReaderImpl implements CSVPrintJobReadeable {
- 
+	
+	private volatile static int jobNumber = 0;
+	
 	public List<PrintJob> readCSVFile(String fileName) throws CSVDataConversionException, IOException {
 		BufferedReader br = getFile(fileName);
 		
@@ -36,7 +38,7 @@ public class RawDataReaderImpl implements CSVPrintJobReadeable {
 			    .map(mapToPrintJob)
 			    .collect(Collectors.toList());
 		} catch (Exception e) {
-			throw new CSVDataConversionException("Unable to parse CSV file into a a print job object");
+			throw new CSVDataConversionException("Unable to parse CSV file into a print job object");
 		} finally {
 			br.close();
 		}
@@ -47,7 +49,7 @@ public class RawDataReaderImpl implements CSVPrintJobReadeable {
 	
 	public static Function<String, PrintJob> mapToPrintJob = (line) -> {
 		  String[] p = line.split(", ");
-		   PrintJob printJob = new PrintJob(0, Integer.parseInt(p[0]), Integer.parseInt(p[1]), PaperSide.getPaperSideByBoolean(Boolean.parseBoolean(p[2])));
+		   PrintJob printJob = new PrintJob(getJobNumber(), Integer.parseInt(p[0]), Integer.parseInt(p[1]), PaperSide.getPaperSideByBoolean(Boolean.parseBoolean(p[2])));
 		   return printJob;
 	};
 	
@@ -66,6 +68,12 @@ public class RawDataReaderImpl implements CSVPrintJobReadeable {
 		return br;
 		
 	}
+
+
+	public static int getJobNumber() {
+		return jobNumber++;
+	}
+	
 		
 		
 }

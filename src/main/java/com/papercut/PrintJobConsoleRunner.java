@@ -1,5 +1,14 @@
 package com.papercut;
 
+/**
+* A class to print data to the console
+* It reads a csv print job file from the resources folder and calculates its total price
+* as well as a breakdown of invidual job prices 
+*
+* @author  Rohan Pereira
+* @version 1.0
+* @since   2016-05-24
+*/
 import java.util.List;
 
 import org.slf4j.Logger;

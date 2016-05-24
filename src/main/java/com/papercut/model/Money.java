@@ -1,5 +1,12 @@
 package com.papercut.model;
 
+/**
+* A class to store money and display it in the right format universally throughout the app
+*
+* @author  Rohan Pereira
+* @version 1.0
+* @since   2016-05-24
+*/
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Currency;

@@ -1,13 +1,15 @@
 package com.papercut.exception;
 
 /**
- * The {@code InvalidInputException} class used to indicate that an exceptional
- * condition has occurred in the Values Input to print system. Created by
- * nareshm on 4/09/2015.
- */
+* An exception to be thrown when a pricing algorithm is not defined or valid for a print job
+*
+* @author  Rohan Pereira
+* @version 1.0
+* @since   2016-05-24
+*/
 public class PricingNotDefinedException extends Exception {
 
-	private static final long serialVersionUID = 7314179734791244446L;
+	private static final long serialVersionUID = 7214179734791244446L;
 
 	/**
      * Constructs a new {@code InvalidInputException} object without a detail

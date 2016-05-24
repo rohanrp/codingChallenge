@@ -1,5 +1,11 @@
 package com.papercut.service.impl;
-
+/**
+* A rules engine to run a print job against a set of pricing rules
+*
+* @author  Rohan Pereira
+* @version 1.0
+* @since   2016-05-24
+*/
 import static org.easyrules.core.RulesEngineBuilder.aNewRulesEngine;
 
 import java.util.List;
@@ -36,7 +42,9 @@ public class PricingRulesEngineV1Impl implements PricingRulesEngine {
 	private PricingRulesEngineV1Impl() {
 	}
 
-	// create a rules engine through singleton pattern
+	/**
+	 * create a rules engine through singleton pattern
+	 */
 	@PostConstruct
 	public static RulesEngine getInstance() {
 		if (engineInstance == null) {
@@ -51,9 +59,13 @@ public class PricingRulesEngineV1Impl implements PricingRulesEngine {
 		return engineInstance;
 	}
 
+	/**
+	 * Register a bunch of pricing rules
+	 * Reuses rules instead of initializing new rules for each print job
+	 */
 	@Override
 	public synchronized void executeRules(PrintJob printJob) {
-		//register the pricing rules
+		//set the pricing metadata for the price rules
 		singleSidedA4.setPrintJob(printJob);
 		doubleSidedA4.setPrintJob(printJob);
 		
